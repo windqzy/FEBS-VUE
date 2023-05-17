@@ -90,17 +90,22 @@ public class LoginController {
     public FebsResponse index(@NotBlank(message = "{required}") @PathVariable String username) {
         Map<String, Object> data = new HashMap<>();
         // 获取系统访问记录
+        // 系统的总访问人数
         Long totalVisitCount = loginLogMapper.findTotalVisitCount();
         data.put("totalVisitCount", totalVisitCount);
+        // 今日的系统访问人数
         Long todayVisitCount = loginLogMapper.findTodayVisitCount();
         data.put("todayVisitCount", todayVisitCount);
+        // 今日的IP数量
         Long todayIp = loginLogMapper.findTodayIp();
         data.put("todayIp", todayIp);
         // 获取近期系统访问记录
+        // 7天内的系统总访问次数
         List<Map<String, Object>> lastSevenVisitCount = loginLogMapper.findLastSevenDaysVisitCount(null);
         data.put("lastSevenVisitCount", lastSevenVisitCount);
         User param = new User();
         param.setUsername(username);
+        // 7天内当前用户的访问次数
         List<Map<String, Object>> lastSevenUserVisitCount = loginLogMapper.findLastSevenDaysVisitCount(param);
         data.put("lastSevenUserVisitCount", lastSevenUserVisitCount);
         return new FebsResponse().data(data);
