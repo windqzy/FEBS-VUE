@@ -7,6 +7,7 @@ moment.locale('zh-cn')
 
 // 统一配置
 let FEBS_REQUEST = axios.create({
+  //基础URL配置
   baseURL: 'http://127.0.0.1:9527/',
   responseType: 'json',
   validateStatus (status) {
@@ -80,6 +81,7 @@ FEBS_REQUEST.interceptors.response.use((config) => {
 })
 
 const request = {
+  //post请求的发送
   post (url, params) {
     return FEBS_REQUEST.post(url, params, {
       transformRequest: [(params) => {
