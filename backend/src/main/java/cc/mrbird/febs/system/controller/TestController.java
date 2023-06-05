@@ -9,6 +9,13 @@ import cc.mrbird.febs.system.service.TestService;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
+import com.theokanning.openai.completion.chat.ChatCompletionChoice;
+import com.theokanning.openai.completion.chat.ChatCompletionRequest;
+import com.theokanning.openai.completion.chat.ChatMessage;
+import com.theokanning.openai.completion.chat.ChatMessageRole;
+import com.theokanning.openai.image.CreateImageRequest;
+import com.theokanning.openai.image.Image;
+import com.theokanning.openai.service.OpenAiService;
 import com.wuwenze.poi.ExcelKit;
 import com.wuwenze.poi.handler.ExcelReadHandler;
 import com.wuwenze.poi.pojo.ExcelErrorField;
@@ -19,10 +26,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.IntStream;
 
 @Slf4j
@@ -83,6 +87,7 @@ public class TestController extends BaseController {
                     test.setCreateTime(new Date());
                     data.add(test);
                 }
+
                 @Override
                 public void onError(int sheet, int row, List<ExcelErrorField> errorFields) {
                     // 数据校验失败时，记录到 error集合
@@ -120,5 +125,41 @@ public class TestController extends BaseController {
             log.error(message, e);
             throw new FebsException(message);
         }
+    }
+
+    @GetMapping("image")
+    public List<Image> images() {
+        OpenAiService service = new OpenAiService("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");
+        CreateImageRequest createImageRequest = CreateImageRequest.builder().prompt("一只可爱动漫小猫咪的头顶开出花朵，当你说你如此的爱我").n(5).size("256x256").user("testing").build();
+
+        List<Image> images = service.createImage(createImageRequest).getData();
+        for (Image image : images) {
+            System.out.println("image.getUrl() = " + image.getUrl());
+        }
+        return images;
+    }
+
+
+
+    @GetMapping("choices")
+    public List<ChatCompletionChoice> createChatCompletion(String content,Integer num,Integer length) {
+        OpenAiService service = new OpenAiService("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");
+        final List<ChatMessage> messages = new ArrayList<>();
+//        final ChatMessage systemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(), "You are a dog and will speak as such.");
+        final ChatMessage systemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(), content);
+        messages.add(systemMessage);
+
+        ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest
+                .builder()
+                .model("gpt-3.5-turbo")
+                .messages(messages)
+                .n(num)
+                .maxTokens(length)
+                .logitBias(new HashMap<>())
+                .build();
+
+        List<ChatCompletionChoice> choices = service.createChatCompletion(chatCompletionRequest).getChoices();
+        System.out.println("choices = " + choices);
+        return choices;
     }
 }

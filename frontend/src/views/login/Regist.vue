@@ -122,6 +122,7 @@ export default {
     }
   },
   computed: {
+    // 根据值实时变化
     passwordLevelClass () {
       return levelClass[this.state.passwordLevel]
     },
@@ -165,7 +166,7 @@ export default {
         callback(new Error('密码强度不够'))
       }
     },
-
+    // 密码检查
     handlePasswordCheck (rule, value, callback) {
       let password = this.form.getFieldValue('password')
       if (value === undefined) {

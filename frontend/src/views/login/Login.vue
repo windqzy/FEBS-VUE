@@ -53,47 +53,47 @@
 import {mapMutations} from 'vuex'
 
 export default {
-  //组件的生命周期：组件实例创建之前被调用
+  // 组件的生命周期：组件实例创建之前被调用
   beforeCreate () {
-    //this代表当前的login.vue组件
+    // this代表当前的login.vue组件
     this.form = this.$form.createForm(this)
   },
-  //组件的名称
+  // 组件的名称
   name: 'Login',
-  //组件的数据对象
+  // 组件的数据对象
   data () {
     return {
-      //组件的加载状态
+      // 组件的加载状态
       loading: false,
-      //组件的错误信息
+      // 组件的错误信息
       error: '',
-      //当前选项卡的激活键
+      // 当前选项卡的激活键
       activeKey: '1'
     }
   },
-  //vue组件中的计算属性：根据
+  // vue组件中的计算属性：根据
   computed: {
     systemName () {
-      //systemName：该计算属性返回this.$store.state.setting.systemName的值。这意味着它从Vue应用的状态管理仓库（store）中获取setting模块的systemName属性的值。当setting模块的systemName属性发生变化时，systemName计算属性会自动重新计算并更新其值
+      // systemName：该计算属性返回this.$store.state.setting.systemName的值。这意味着它从Vue应用的状态管理仓库（store）中获取setting模块的systemName属性的值。当setting模块的systemName属性发生变化时，systemName计算属性会自动重新计算并更新其值
       return this.$store.state.setting.systemName
     },
     copyright () {
-      //copyright：该计算属性返回this.$store.state.setting.copyright的值。它获取setting模块的copyright属性的值，并且在setting模块的copyright属性发生变化时，自动重新计算并更新
+      // copyright：该计算属性返回this.$store.state.setting.copyright的值。它获取setting模块的copyright属性的值，并且在setting模块的copyright属性发生变化时，自动重新计算并更新
       return this.$store.state.setting.copyright
     }
   },
-  //组件的生命周期：可以执行一些初始化操作，它在组件实例创建完成后被调用
+  // 组件的生命周期：可以执行一些初始化操作，它在组件实例创建完成后被调用
   created () {
-    //清空浏览器的本地存储（localStorage）中的所有数据
+    // 清空浏览器的本地存储（localStorage）中的所有数据
     this.$db.clear()
-    //将路由配置项中的路由数组清空，可能是为了在组件创建时重置路由配置，清空已有的路由信息
+    // 将路由配置项中的路由数组清空，可能是为了在组件创建时重置路由配置，清空已有的路由信息
     this.$router.options.routes = []
   },
-  //组件中可以调用的方法
+  // 组件中可以调用的方法
   methods: {
-    //登录方法
+    // 登录方法
     doLogin () {
-      //如果选项卡为1
+      // 如果选项卡为1
       if (this.activeKey === '1') {
         // 用户名密码登录：验证字段后发起请求给
         this.form.validateFields(['name', 'password'], (errors, values) => {
@@ -125,14 +125,14 @@ export default {
         this.$message.warning('暂未开发')
       }
     },
-    //注册方法
+    // 注册方法
     regist () {
       this.$emit('regist', 'Regist')
     },
     getCaptcha () {
       this.$message.warning('暂未开发')
     },
-    //选项卡改变的方法
+    // 选项卡改变的方法
     handleTabsChange (val) {
       this.activeKey = val
     },
@@ -149,7 +149,7 @@ export default {
       fixHeader: 'setting/fixHeader',
       setColor: 'setting/setColor'
     }),
-    //Vuex store 是一个存储应用程序状态的容器，提供了一种集中式管理状态的机制，以便于状态的修改、访问和追踪
+    // Vuex store 是一个存储应用程序状态的容器，提供了一种集中式管理状态的机制，以便于状态的修改、访问和追踪
     saveLoginData (data) {
       this.setToken(data.token)
       this.setExpireTime(data.exipreTime)
