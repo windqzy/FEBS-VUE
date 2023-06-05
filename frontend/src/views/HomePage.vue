@@ -44,7 +44,7 @@
       </a-col>
       <a-col :span="12" class="project-wrapper">
         <a-card title="进行中的项目" class="project-card">
-          <a href="https://github.com/wuyouzhuguli?tab=repositories" target="_blank" slot="extra">所有项目</a>
+          <a href="https://github.com/windqzy?tab=repositories" target="_blank" slot="extra">所有项目</a>
           <table>
             <tr>
               <td>
@@ -166,8 +166,8 @@ export default {
       },
       projects: [
         {
-          name: 'FEBS-Shiro',
-          des: 'Spring Boot 2.0.4 & Shiro1.4.0 权限管理系统。',
+          name: 'CHAT',
+          des: 'CHATGPT 口语练习网站。',
           avatar: 'F'
         },
         {
