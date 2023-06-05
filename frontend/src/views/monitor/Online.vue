@@ -88,6 +88,7 @@ export default {
         width: 120
       }]
     },
+    // vuex状态管理：获取状态中的用户
     ...mapState({
       user: state => state.account.user
     })
