@@ -23,6 +23,7 @@ export default {
       state.user = val
     },
     setPermissions (state, val) {
+      debugger
       db.save('PERMISSIONS', val)
       state.permissions = val
     },

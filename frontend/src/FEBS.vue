@@ -20,6 +20,7 @@ export default {
   },
   created () {
     let _this = this
+    // 设备兼容性
     enquireScreen(isMobile => {
       _this.$store.commit('setting/setDevice', isMobile)
     })

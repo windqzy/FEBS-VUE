@@ -17,7 +17,6 @@ public class AiController {
 
         OpenAiService service = new OpenAiService("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");
         final List<ChatMessage> messages = new ArrayList<>();
-//        final ChatMessage systemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(), "生成50个的挖机的同义词");
         final ChatMessage systemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(), content);
         messages.add(systemMessage);
 
@@ -35,6 +34,4 @@ public class AiController {
         //写入数据库
         return choices;
     }
-
-
 }

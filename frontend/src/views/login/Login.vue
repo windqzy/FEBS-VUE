@@ -106,6 +106,8 @@ export default {
               password: password
             }).then((r) => {
               let data = r.data.data
+              // 保存登陆信息
+              debugger
               this.saveLoginData(data)
               setTimeout(() => {
                 this.loading = false
@@ -150,17 +152,29 @@ export default {
       setColor: 'setting/setColor'
     }),
     // Vuex store 是一个存储应用程序状态的容器，提供了一种集中式管理状态的机制，以便于状态的修改、访问和追踪
+    // 保存登陆信息
     saveLoginData (data) {
+      console.log(data.token)
       this.setToken(data.token)
+      console.log(data.exipreTime)
       this.setExpireTime(data.exipreTime)
+      console.log(data.user)
       this.setUser(data.user)
+      console.log(data.permissions)
       this.setPermissions(data.permissions)
+      console.log(data.roles)
       this.setRoles(data.roles)
+      console.log(data.config.theme)
       this.setTheme(data.config.theme)
+      console.log(data.config.layout)
       this.setLayout(data.config.layout)
+      console.log(data.config.multiPage)
       this.setMultipage(data.config.multiPage === '1')
+      console.log(data.config.fixSiderbar)
       this.fixSiderbar(data.config.fixSiderbar === '1')
+      console.log(data.config.fixHeader)
       this.fixHeader(data.config.fixHeader === '1')
+      console.log(data.config.color)
       this.setColor(data.config.color)
     }
   }

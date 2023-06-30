@@ -89,6 +89,7 @@ export default {
       }]
     },
     // vuex状态管理：获取状态中的用户
+    // 主要判断是不是当前用户的操作
     ...mapState({
       user: state => state.account.user
     })

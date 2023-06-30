@@ -11,7 +11,8 @@ import request from 'utils/request'
 // 全局Router异常处理
 const originalPush = Router.prototype.push
 Router.prototype.push = function push (location) {
-  return originalPush.call(this, location).catch(err => { if (typeof err !== 'undefined')console.log(err) })
+  // return originalPush.call(this, location).catch(err => { if (typeof err !== 'undefined')console.log(err) })
+  return originalPush.call(this, location).catch(err => { console.log(err) })
 }
 Vue.use(Router)
 
@@ -38,6 +39,10 @@ let asyncRouter
 
 // 导航守卫，渲染动态路由
 router.beforeEach((to, from, next) => {
+  debugger
+  console.log(whiteList)
+  console.log(to.path)
+  console.log(from.path)
   if (whiteList.indexOf(to.path) !== -1) {
     next()
   }
@@ -47,9 +52,12 @@ router.beforeEach((to, from, next) => {
   if (token.length && user) {
     if (!asyncRouter) {
       if (!userRouter) {
+        console.log(userRouter)
         request.get(`menu/${user.username}`).then((res) => {
           asyncRouter = res.data
+          console.log(res.data)
           save('USER_ROUTER', asyncRouter)
+          console.log(asyncRouter.path)
           go(to, next)
         }).catch(err => { console.error(err) })
       } else {
@@ -79,6 +87,7 @@ function get (name) {
 }
 
 function filterAsyncRouter (routes) {
+  // 动态路由的主要实现地点
   return routes.filter((route) => {
     let component = route.component
     if (component) {
