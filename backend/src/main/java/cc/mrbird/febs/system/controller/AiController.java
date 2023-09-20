@@ -13,9 +13,7 @@ public class AiController {
     
     @GetMapping("choices")
     public List<ChatCompletionChoice> createChatCompletion(String content, Integer num, Integer length) {
-
-
-        OpenAiService service = new OpenAiService("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");
+        OpenAiService service = new OpenAiService("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");
         final List<ChatMessage> messages = new ArrayList<>();
         final ChatMessage systemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(), content);
         messages.add(systemMessage);

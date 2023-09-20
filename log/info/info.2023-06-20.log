@@ -1,0 +1,14 @@
+2023-06-20 10:22:44.747 febs [scheduling-1] INFO  cc.mrbird.febs.common.task.CacheTask - delete expired user
+2023-06-20 11:22:44.718 febs [scheduling-1] INFO  cc.mrbird.febs.common.task.CacheTask - delete expired user
+2023-06-20 12:22:44.755 febs [scheduling-1] INFO  cc.mrbird.febs.common.task.CacheTask - delete expired user
+2023-06-20 12:23:21.125 febs [Thread-9] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2023-06-20 12:23:21.126 febs [Thread-9] INFO  o.s.s.c.ThreadPoolTaskScheduler - Shutting down ExecutorService 'taskScheduler'
+2023-06-20 12:23:21.130 febs [Thread-9] INFO  o.s.s.c.ThreadPoolTaskExecutor - Shutting down ExecutorService 'taskExecutor'
+2023-06-20 12:23:21.131 febs [Thread-9] INFO  o.s.s.quartz.SchedulerFactoryBean - Shutting down Quartz Scheduler
+2023-06-20 12:23:21.131 febs [Thread-9] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2023-06-20 12:23:21.131 febs [Thread-9] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2023-06-20 12:23:21.131 febs [Thread-9] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2023-06-20 12:23:21.133 febs [Thread-9] INFO  c.b.d.d.DynamicRoutingDataSource - dynamic-datasource start closing ....
+2023-06-20 12:23:21.134 febs [Thread-9] INFO  com.zaxxer.hikari.HikariDataSource - primary - Shutdown initiated...
+2023-06-20 12:23:21.136 febs [Thread-9] INFO  com.zaxxer.hikari.HikariDataSource - primary - Shutdown completed.
+2023-06-20 12:23:21.136 febs [Thread-9] INFO  c.b.d.d.DynamicRoutingDataSource - dynamic-datasource all closed success,bye
