@@ -8,7 +8,7 @@ moment.locale('zh-cn')
 // 统一配置
 let FEBS_REQUEST = axios.create({
   // 基础URL配置
-  baseURL: 'http://13.229.97.170:9527/',
+  baseURL: 'http://13.229.97.170:9527/kedu/',
   responseType: 'json',
   validateStatus (status) {
     // 200 外的状态码都认定为失败
