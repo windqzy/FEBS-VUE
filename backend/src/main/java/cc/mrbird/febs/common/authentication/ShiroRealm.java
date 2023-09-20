@@ -7,6 +7,7 @@ import cc.mrbird.febs.common.utils.HttpContextUtil;
 import cc.mrbird.febs.common.utils.IPUtil;
 import cc.mrbird.febs.system.domain.User;
 import cc.mrbird.febs.system.manager.UserManager;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -26,6 +27,7 @@ import java.util.Set;
  *
  * @author MrBird
  */
+@Slf4j
 public class ShiroRealm extends AuthorizingRealm {
 
     @Autowired
@@ -44,6 +46,7 @@ public class ShiroRealm extends AuthorizingRealm {
      * @param token token
      * @return AuthorizationInfo 权限信息
      */
+
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection token) {
         String username = JWTUtil.getUsername(token.toString());
@@ -67,10 +70,12 @@ public class ShiroRealm extends AuthorizingRealm {
      * @return AuthenticationInfo 身份认证信息
      * @throws AuthenticationException 认证相关异常
      */
+
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         // 这里的 token是从 JWTFilter 的 executeLogin 方法传递过来的，已经经过了解密
         String token = (String) authenticationToken.getCredentials();
+        log.info("token==="+token);
 
         // 从 redis里获取这个 token
         HttpServletRequest request = HttpContextUtil.getHttpServletRequest();
@@ -80,6 +85,7 @@ public class ShiroRealm extends AuthorizingRealm {
         String encryptTokenInRedis = null;
         try {
             encryptTokenInRedis = redisService.get(FebsConstant.TOKEN_CACHE_PREFIX + encryptToken + "." + ip);
+            log.info("encryptTokenInRedis==="+encryptTokenInRedis);
         } catch (Exception ignore) {
         }
         // 如果找不到，说明已经失效

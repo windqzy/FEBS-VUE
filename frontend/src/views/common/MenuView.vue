@@ -64,7 +64,6 @@ export default {
       }
     },
     'activePage': function (key) {
-      console.log("key"+key)
       this.$router.push(key)
     },
     'multipage': function (newVal, oldVal) {
