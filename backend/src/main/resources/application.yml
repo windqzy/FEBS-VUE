@@ -1,7 +1,7 @@
 server:
   port: 8888
-#  servlet:
-#    context-path: /kedu
+  servlet:
+    context-path: /kedu
 
 spring:
   datasource:
@@ -21,8 +21,8 @@ spring:
         # 数据源-1，名称为 primary
         primary:
           username: root
-          password: Qinzhiying521.
-#          password: 123456
+#          password: Qinzhiying521.
+          password: 123456
           driver-class-name: com.mysql.cj.jdbc.Driver
           url: jdbc:mysql://127.0.0.1:3306/febs?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
         # 数据源-2，名称为 test
@@ -81,7 +81,7 @@ febs:
         num: 1000
   shiro:
     # 后端免认证接口 url
-    anonUrl: /login,/logout/**,/regist,/user/check/**,/swagger-resources/**,/webjars/**,/v2/**,/swagger-ui.html/**,/favicon.ico
+    anonUrl: /kedu/login,/kedu/logout/**,/kedu/regist,/kedu/user/check/**,/kedu/swagger-resources/**,/kedu/webjars/**,/v2/**,/kedu/swagger-ui.html/**,/kedu/favicon.ico
     # token有效期，单位秒
     jwtTimeOut: 3600
   # Swagger相关配置

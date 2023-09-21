@@ -9,7 +9,8 @@ moment.locale('zh-cn')
 let FEBS_REQUEST = axios.create({
   // 基础URL配置
   // baseURL: 'http://13.229.97.170:80/kedu/',
-  baseURL: 'http://127.0.0.1:8888/',
+  // baseURL: 'http://127.0.0.1:8888/',
+  baseURL: 'http://127.0.0.1:8888/kedu/',
   responseType: 'json',
   validateStatus (status) {
     // 200 外的状态码都认定为失败
@@ -20,6 +21,7 @@ let FEBS_REQUEST = axios.create({
 // 拦截请求
 FEBS_REQUEST.interceptors.request.use((config) => {
   let expireTime = store.state.account.expireTime
+  console.log(store.state.account.token)
   let now = moment().format('YYYYMMDDHHmmss')
   // 让token早10秒种过期，提升“请重新登录”弹窗体验
   if (now - expireTime >= -10) {
@@ -40,6 +42,7 @@ FEBS_REQUEST.interceptors.request.use((config) => {
   }
   // 有 token就带上
   if (store.state.account.token) {
+    console.log(store.state.account.token)
     config.headers.Authentication = store.state.account.token
   }
   return config

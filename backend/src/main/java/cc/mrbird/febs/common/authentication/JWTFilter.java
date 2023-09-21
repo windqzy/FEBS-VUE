@@ -30,6 +30,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) throws UnauthorizedException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+        System.out.println("httpServletRequest.getRequestURI() = " + httpServletRequest.getRequestURI());
         FebsProperties febsProperties = SpringContextUtil.getBean(FebsProperties.class);
         String[] anonUrl = StringUtils.splitByWholeSeparatorPreserveAllTokens(febsProperties.getShiro().getAnonUrl(), StringPool.COMMA);
 

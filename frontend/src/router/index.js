@@ -40,15 +40,17 @@ let asyncRouter
 // 导航守卫，渲染动态路由
 router.beforeEach((to, from, next) => {
   debugger
-  console.log(whiteList)
+  console.log('-------------start----------------')
   console.log(to.path)
   console.log(from.path)
+  // 登录属于白名单方法
   if (whiteList.indexOf(to.path) !== -1) {
     next()
   }
   let token = db.get('USER_TOKEN')
   let user = db.get('USER')
   let userRouter = get('USER_ROUTER')
+  // 用户没有登录则登录
   if (token.length && user) {
     if (!asyncRouter) {
       if (!userRouter) {
@@ -68,6 +70,7 @@ router.beforeEach((to, from, next) => {
       next()
     }
   } else {
+    // 递归调用next方法
     next('/login')
   }
 })
